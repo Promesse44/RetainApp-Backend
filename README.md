@@ -1,96 +1,85 @@
-# Retain — Personal Expense & Budget Manager
+# Retain API
 
-A full-stack web application for managing personal expenses and monthly budgets.
+Backend API for Retain, a personal expense and budget manager.
 
-**Live App:** _coming soon_
+This repository contains the Node.js/Express backend and PostgreSQL/Prisma data layer. The React frontend now lives in the separate `RetainApp-Frontend` repository and should be deployed to Vercel.
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS |
-| State (auth) | React Context |
-| State (filters) | Redux Toolkit |
-| Backend | Node.js, Express |
-| ORM | Prisma |
-| Database | PostgreSQL |
-| Auth | JWT (access + refresh tokens) |
+- Node.js
+- Express
+- Prisma
+- PostgreSQL
+- JWT authentication
 
-## Project Structure
+## Repository Structure
 
-```
-retain/
-├── apps/
-│   ├── api/   — Express + Prisma backend
-│   └── web/   — React + Vite frontend
-└── package.json
-```
+- `apps/api` - backend application
+- `apps/api/prisma` - Prisma schema, migrations, and seed script
 
-## Setup
+## Local Setup
 
-### 1. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Configure backend environment
-```bash
-cd apps/api
-copy .env.example .env
-```
-Edit `.env` with your PostgreSQL credentials.
+Create `apps/api/.env` with your backend environment variables.
 
-### 3. Run database migrations
+Typical values:
+
+- `DATABASE_URL`
+- `JWT_SECRET`
+- `JWT_REFRESH_SECRET`
+- `JWT_EXPIRES_IN`
+- `JWT_REFRESH_EXPIRES_IN`
+- `CORS_ORIGINS`
+
+## Database Commands
+
+From the repository root:
+
 ```bash
 npm run db:migrate
-```
-
-### 4. Seed the database
-```bash
 npm run db:seed
 ```
-Creates default categories and an admin account:
-- Email: `admin@retain.app`
-- Password: `Admin@1234`
 
-### 5. Start the backend
+## Run Locally
+
 ```bash
 npm run dev:api
 ```
-API runs at `http://localhost:4000`
 
-### 6. Start the frontend
-```bash
-npm run dev:web
-```
-App runs at `http://localhost:5173`
+The API runs on `http://localhost:4000` by default.
 
-## API Endpoints
+## API Routes
 
-| Method | Endpoint | Description | Auth |
-|---|---|---|---|
-| POST | /api/auth/register | Register a new user | Public |
-| POST | /api/auth/login | Login | Public |
-| POST | /api/auth/refresh | Refresh access token | Public |
-| GET | /api/expenses | List user expenses (filterable) | User |
-| POST | /api/expenses | Create expense | User |
-| PUT | /api/expenses/:id | Update expense | User |
-| DELETE | /api/expenses/:id | Delete expense | User |
-| GET | /api/budgets/:month | Get budget for a month | User |
-| PUT | /api/budgets/:month | Set/update budget | User |
-| GET | /api/categories | List all categories | User |
-| POST | /api/admin/categories | Create category | Admin |
-| PUT | /api/admin/categories/:id | Update category | Admin |
-| DELETE | /api/admin/categories/:id | Delete category | Admin |
-| GET | /api/admin/insights | Platform insights | Admin |
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `POST /api/auth/refresh`
+- `GET /api/auth/me`
+- `GET /api/expenses`
+- `POST /api/expenses`
+- `PUT /api/expenses/:id`
+- `DELETE /api/expenses/:id`
+- `GET /api/expenses/dashboard`
+- `GET /api/budgets`
+- `GET /api/budgets/:month`
+- `PUT /api/budgets/:month`
+- `GET /api/categories`
+- `GET /api/admin/insights`
+- `POST /api/admin/categories`
+- `PUT /api/admin/categories/:id`
+- `DELETE /api/admin/categories/:id`
 
-## Features
+## Deploying to Render
 
-- User authentication (sign up, sign in, sign out)
-- Role-based access (USER / ADMIN)
-- Expense CRUD with category, payment method, date, notes
-- Monthly budget tracking with spending status
-- User dashboard with spending summaries
-- Expense filtering, searching, and sorting (Redux)
-- Admin dashboard with platform insights and category management
-- Responsive UI
+- Create a Render project for the backend.
+- Add a PostgreSQL database.
+- Deploy the API as a Web Service.
+- Build command: `npm install && npx prisma generate && npx prisma migrate deploy`
+- Start command: `npm start`
+- Set `DATABASE_URL`, `JWT_SECRET`, `JWT_REFRESH_SECRET`, and `CORS_ORIGINS` in Render.
+
+## Frontend Repo
+
+The frontend is deployed separately from the `RetainApp-Frontend` repository on Vercel.

@@ -2,7 +2,12 @@
 
 Backend API for Retain, a personal expense and budget manager.
 
-This repository contains the Node.js/Express backend and PostgreSQL/Prisma data layer. The React frontend now lives in the separate `RetainApp-Frontend` repository and should be deployed to Vercel.
+This repository contains the Node.js/Express backend and PostgreSQL/Prisma data layer. 
+
+## Deployment
+
+The Backend is deployed on Render.
+https://retainapp-backend.onrender.com
 
 ## Tech Stack
 

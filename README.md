@@ -7,7 +7,7 @@ This repository contains the Node.js/Express backend and PostgreSQL/Prisma data 
 ## Deployment
 
 The Backend is deployed on Render.
-[Clickable Text] (https://retainapp-backend.onrender.com)
+(https://retainapp-backend.onrender.com)
 
 ## Tech Stack
 
